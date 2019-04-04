@@ -12,3 +12,16 @@
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
+
+
+<div id="bug-section">
+	<div id="bug">
+		<h2>Bugs</h2>
+		<p><%= render @project.bugs  %></p>
+	</div>
+
+
+	<h2>Add a new Bug:</h2>	
+	<%= render 'bugs/form' %>
+
+</div>

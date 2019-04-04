@@ -27,6 +27,13 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
+  
+  <div class="field">
+    <%= f.label :User_type %><br/>
+    <%= f.radio_button :user_type, 'developer' %> Developer <br/>
+    <%= f.radio_button :user_type, 'manager' %> Manager <br/>
+    <%= f.radio_button :user_type, 'qa' %> QA <br />
+  </div>
 
   <div class="actions">
     <%= f.submit "Sign up" %>
