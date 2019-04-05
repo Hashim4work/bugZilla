@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  deadline: 2019-04-04
+  picture: MyString
+  bug_type: MyString
+  bug_status: MyString
+  project: one
+
+two:
+  title: MyString
+  deadline: 2019-04-04
+  picture: MyString
+  bug_type: MyString
+  bug_status: MyString
+  project: two

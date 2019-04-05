@@ -1,0 +1,3 @@
+<% if @bug.errors.any? %>
+	alert("error: <%= j @bug.errors.full_messages.join(';') %>"); 
+<% end %>

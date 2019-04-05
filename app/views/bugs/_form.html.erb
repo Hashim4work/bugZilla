@@ -1,0 +1,35 @@
+<%= form_with(model: [@project, @project.bugs.build], remote: true)  do |form| %>
+<p>
+	<%= form.label :title %><br>
+	<%= form.text_field :title  %>
+</p>
+<p>
+	<%= form.label :deadline %><br>
+	<%= form.date_field :deadline %>
+</p>
+
+<p>
+	<%= form.label :picture %><br>
+	<%= form.file_field :picture, accept: '.png' %>
+</p>
+
+<p>
+	<%= form.label :bug_type %><br>
+	<%= form.select :bug_type, ['bug','feature'] %>
+</p>
+
+<p id="type_bug" style="display: none;">
+	<%= form.label :bug_status %><br>
+	<%= form.select :bug_status, ['new' ,'started', 'resolved'] %>
+</p>
+
+<p id = "type_feature" >
+	<%= form.label :bug_status %><br>
+	<%= form.select :bug_status, ['new' ,'started', 'completed'] %>
+</p>
+
+<p>
+
+	<%= form.submit  %>
+</p>
+<%end%>

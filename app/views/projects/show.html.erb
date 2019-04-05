@@ -16,12 +16,13 @@
 
 <div id="bug-section">
 	<div id="bug">
-		<h2>Bugs</h2>
+		<h2><%= @project.bugs.count %> Bugs</h2>
 		<p><%= render @project.bugs  %></p>
 	</div>
 
+	<% if current_user.user_type == "qa" %>
 
-	<h2>Add a new Bug:</h2>	
-	<%= render 'bugs/form' %>
-
+		<h2>Add a new Bug:</h2>	
+		<%= render 'bugs/form' %>
+	<%end%>	
 </div>

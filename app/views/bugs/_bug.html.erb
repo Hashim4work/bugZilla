@@ -1,0 +1,15 @@
+ <div id="bug_<%= bug.id %>" >
+					
+					<p><strong>Title:</strong><%= bug.title %></p>
+					<p><strong>Deadline:</strong><%= bug.deadline %></p>
+					<p><strong>Screenshot:</strong><%= image_tag bug.picture_url, width: '30%'  if bug.picture.present? %> </p>
+					<p><strong>Type:</strong><%= bug.bug_type %> </p>
+					<p><strong>Status</strong><%= bug.bug_status %> </p>
+				
+
+	<% if current_user.user_type == "qa" %>				
+		<%= link_to 'Destory bug', [bug.project,bug], remote: true, :class => 'btn btn-default',style: "color: red", method: :delete, data: {confirm: "Are you sure?"} %>
+	<%end%>
+					<hr style="border-bottom: 1px solid black">	
+		
+</div>
