@@ -16,15 +16,15 @@
       <tr>
         <td><%= project.title %></td>
         <td><%= project.description %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', project  if policy(project).show? %></td>
+        <td><%= link_to 'Edit', edit_project_path(project) if policy(project).edit? %></td>
+        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } if policy(project).destroy? %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-<% if current_user.user_type == "manager" %>
+<% if policy(Project).new? %>
   <%= link_to 'New Project', new_project_path %>
 <% end %>
