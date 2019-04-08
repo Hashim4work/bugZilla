@@ -2,9 +2,13 @@ Rails.application.routes.draw do
   
   devise_for :users
   resources :projects do
-  	resources :bugs
+  	resources :bugs do
+      get 'update_assigner'
+      get 'update_complete'
+    end
   end
-
+  #put 'bugs/update_assigner' => 'bugs#update_assigner'
+  #put 'bugs_controller/update_assigner' => 'bugs_controller#update_assigner'
   get 'projects/index'
   #root to: redirect('users/sign_in')
   authenticated :user do

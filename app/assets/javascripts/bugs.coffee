@@ -13,9 +13,11 @@ $(document).on 'click', '#bug_bug_type', ->
   	$('#type_bug').show()
   	$('#type_feature').hide()
 
+$(document).on 'click', '#d_assigner', ->
+  console.log("d_assigner")
+  $("#d_assigner").hide()
 
-$(document).on 'click', '#tbug', ->
-  console.log("bug")
 
-$(document).on 'click', '#tfeature', ->
-  console.log("feature")
+$(document).on 'click', '#u_assigner', ->
+  console.log("d_assigner")
+  $("#u_assigner").hide()

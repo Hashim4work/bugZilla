@@ -1,7 +1,7 @@
 class Bug < ApplicationRecord
   mount_uploader :picture, PictureUploader
   belongs_to :project
-
+  belongs_to :user
 
   validates :title, presence: true, uniqueness: true
   validates :picture, format: {with: %r{\.(gif|png)\Z}i , message: "only allows png"}

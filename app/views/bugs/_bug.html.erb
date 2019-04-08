@@ -1,14 +1,30 @@
  <div id="bug_<%= bug.id %>" >
 					
-					<p><strong>Title:</strong><%= bug.title %></p>
-					<p><strong>Deadline:</strong><%= bug.deadline %></p>
-					<p><strong>Screenshot:</strong><%= image_tag bug.picture_url, width: '30%'  if bug.picture.present? %> </p>
-					<p><strong>Type:</strong><%= bug.bug_type %> </p>
-					<p><strong>Status</strong><%= bug.bug_status %> </p>
-				
+					<p><strong>Title: </strong><%= bug.title %></p>
+					<p><strong>Deadline: </strong><%= bug.deadline %></p>
+					<p><strong>Screenshot: </strong><%= image_tag bug.picture_url, width: '30%'  if bug.picture.present? %> </p>
+					<p><strong>Type: </strong><%= bug.bug_type %> </p>
+					<p><strong>Status: </strong><%= bug.bug_status %> </p>
+
+
+					<% if bug.assignment? &&  bug.assignment == "developer" %>
+						<%if current_user.user_type == "developer"  && bug.assignment == current_user.name %>
+							<p><%= link_to 'complete?' ,project_bug_update_complete_path(bug.project.id, bug.id) , id:'u_assigner'  if policy(bug).update_complete?%></p>
+						<%else %>
+							<p><strong>Assigned-to: </strong><%= bug.assignment %> </p>
+						<%end%>
+					<% elsif bug.assignment == "completed" %>
+						<p><strong>Assigned-to: </strong> Not Assigned because completed</p>
+					<% else %>
+						<% if current_user.user_type == "developer" %>
+							<p><%= link_to 'Assign?' , project_bug_update_assigner_path(bug.project.id, bug.id) , id:'d_assigner'  %></p>
+						<% else %>
+							<p><strong>Assigned-to: </strong> Not Assigned</p>
+						<% end %>
+					<%end%>	
 
 	<% if current_user.user_type == "qa" %>				
-		<%= link_to 'Destory bug', [bug.project,bug], remote: true, :class => 'btn btn-default',style: "color: red", method: :delete, data: {confirm: "Are you sure?"} %>
+		<%= link_to 'Destory bug', [bug.project,bug], remote: true, :class => 'btn btn-default',style: "color: red", method: :delete, data: {confirm: "Are you sure?"}  if policy(bug).destroy?  %>
 	<%end%>
 					<hr style="border-bottom: 1px solid black">	
 		
