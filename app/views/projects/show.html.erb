@@ -10,9 +10,9 @@
   <%= @project.description %>
 </p>
 
-
-<%= link_to 'Destroy', @project, method: :delete, data: { confirm: 'Are you sure?' } if policy(@project).new? %></td> 
-<%= link_to 'Edit', edit_project_path(@project) if policy(@project).new? %>
+<%= link_to 'Add developer/QA', project_add_user_path(@project.id)  if policy(@project).add_user? %>
+<%= link_to 'Destroy', @project, method: :delete, data: { confirm: 'Are you sure?' } if policy(@project).destroy? %></td> 
+<%= link_to 'Edit', edit_project_path(@project) if policy(@project).edit? %>
 <%= link_to 'Back', projects_path %>
 
 

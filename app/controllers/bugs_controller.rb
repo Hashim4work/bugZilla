@@ -2,9 +2,10 @@ class BugsController < ApplicationController
 
 	def create
 		@project = Project.find(params[:project_id])
-		authorize @bug
 		@project.id
-		@bug = @project.bugs.create(params[:bug].permit(:title, :deadline, :picture, :bug_type, :bug_status))
+
+		@bug = @project.bugs.create(params[:bug].permit(:title, :deadline, :picture, :bug_type, :bug_status, :user_id))
+		authorize @bug
 		if(@bug.save)
 			respond_to do |format|
 				format.html { redirect_to project_path(@project)}	

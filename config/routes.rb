@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   
   devise_for :users
   resources :projects do
+    get 'add_user'
+    get 'add_user_to_project'
+    get 'remove_user_from_project'
   	resources :bugs do
       get 'update_assigner'
       get 'update_complete'

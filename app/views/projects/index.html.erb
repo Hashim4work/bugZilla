@@ -13,13 +13,26 @@
 
   <tbody>
     <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.title %></td>
-        <td><%= project.description %></td>
-        <td><%= link_to 'Show', project  if policy(project).show? %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) if policy(project).edit? %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } if policy(project).destroy? %></td>
-      </tr>
+      <% if current_user.user_type == "developer" %>
+        <% if project == current_user.projects.find_by(id: project.id) %>  
+          <tr>
+            <td><%= project.title %></td>
+            <td><%= project.description %></td>
+            <td><%= link_to 'Show', project  if policy(project).show? %></td>
+            <td><%= link_to 'Edit', edit_project_path(project) if policy(project).edit? %></td>
+            <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } if policy(project).destroy? %></td>
+          </tr>
+        <%end %>
+      <%else %>
+        <tr>
+          <td><%= project.title %></td>
+          <td><%= project.description %></td>
+          <td><%= link_to 'Show', project  if policy(project).show? %></td>
+          <td><%= link_to 'Edit', edit_project_path(project) if policy(project).edit? %></td>
+          <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } if policy(project).destroy? %></td>
+        </tr>
+      <%end%> 
+
     <% end %>
   </tbody>
 </table>

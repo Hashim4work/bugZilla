@@ -1,0 +1,33 @@
+<h1>All users are</h1>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users = User.all %>
+	<% @users.each  do |user| %>
+        <% if user.qa? || user.developer? %>
+			<tr>
+				<td><%= user.name %></td>
+				<td><%= user.email %></td>
+				<td><%= user.user_type %></td>
+				<% if user == @project.users.find_by(id: user.id) %>
+					<td><%= link_to 'Remove user from project' , {controller: 'projects', action: 'remove_user_from_project', user_id: user.id, project_id: @project.id} if policy(@project).remove_user_from_project? %>
+				<% else %>
+					<td><%= link_to 'Add user to project' , {controller: 'projects', action: 'add_user_to_project', user_id: user.id, project_id: @project.id} if policy(@project).add_user_to_project?%>
+				<%end %>		
+				</tr>
+	    <%end %>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to 'back' , @project  if policy(@project).show? %>
