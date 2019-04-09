@@ -27,6 +27,11 @@ class BugsController < ApplicationController
 		puts current_user.name
 		puts 'x'*1000
 		bug.update_attribute(:assignment, current_user.name)
+		if bug.bug_type == 'bug'
+			bug.update_attribute(:bug_status, 'started')
+		else
+			bug.update_attribute(:bug_status, 'started')
+		end
 		bug.save	
 
 		redirect_to project_path(@project)	
@@ -38,6 +43,11 @@ class BugsController < ApplicationController
 		authorize bug
 
 		bug.update_attribute(:assignment, 'completed')
+		if bug.bug_type == 'bug'
+			bug.update_attribute(:bug_status, 'resolved')
+		else
+			bug.update_attribute(:bug_status, 'completed')
+		end
 		bug.save	
 
 		redirect_to project_path(@project)	

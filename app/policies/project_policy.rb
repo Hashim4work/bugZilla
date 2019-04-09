@@ -1,8 +1,5 @@
 class ProjectPolicy <	ApplicationPolicy
 
-	def index?
-		user.present?
-	end
 	
 	def new?
 		user.present? && user.manager?

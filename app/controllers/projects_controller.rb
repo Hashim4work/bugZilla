@@ -6,7 +6,6 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.all
-    authorize @projects
   end
 
   # GET /projects/1
