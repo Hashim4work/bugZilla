@@ -1,5 +1,6 @@
 <h1>Projects</h1>
 
+<% if @projects.count > 0 %>
 <table>
   <thead>
     <tr style="border: 1px solid #dddddd; padding-bottom: 4px !important;">
@@ -37,6 +38,9 @@
     <% end %>
   </tbody>
 </table>
+<%else %>
+  <h2>No projects found</h2>
+<%end%>
 
 <br>
 <% if policy(Project).new? %>
