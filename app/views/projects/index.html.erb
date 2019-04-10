@@ -1,12 +1,13 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Projects</h1>
 
 <table>
   <thead>
-    <tr>
+    <tr style="border: 1px solid #dddddd; padding-bottom: 4px !important;">
       <th>Title</th>
       <th>Description</th>
+      <th>Show Project</th>
+      <th>Display Project</th>
+      <th>Delete Project</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,18 +19,18 @@
           <tr>
             <td><%= project.title %></td>
             <td><%= project.description %></td>
-            <td><%= link_to 'Show', project  if policy(project).show? %></td>
-            <td><%= link_to 'Edit', edit_project_path(project) if policy(project).edit? %></td>
-            <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } if policy(project).destroy? %></td>
+            <td><%= link_to 'Show', project, class: "btn btn-secondary"  if policy(project).show? %></td>
+            <td><%= link_to 'Edit', edit_project_path(project), class: "btn btn-secondary" if policy(project).edit? %></td>
+            <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary" if policy(project).destroy? %></td>
           </tr>
         <%end %>
       <%else %>
         <tr>
           <td><%= project.title %></td>
           <td><%= project.description %></td>
-          <td><%= link_to 'Show', project  if policy(project).show? %></td>
-          <td><%= link_to 'Edit', edit_project_path(project) if policy(project).edit? %></td>
-          <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } if policy(project).destroy? %></td>
+          <td><%= link_to 'Show', project, class: "btn btn-secondary"  if policy(project).show? %></td>
+          <td><%= link_to 'Edit', edit_project_path(project), class: "btn btn-secondary" if policy(project).edit? %></td>
+          <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary" if policy(project).destroy? %></td>
         </tr>
       <%end%> 
 
@@ -39,5 +40,5 @@
 
 <br>
 <% if policy(Project).new? %>
-  <%= link_to 'New Project', new_project_path %>
+  <%= link_to 'New Project', new_project_path, class: "btn btn-primary", style: "color: white;"  %>
 <% end %>

@@ -11,7 +11,6 @@ class BugsController < ApplicationController
 				format.html { redirect_to project_path(@project)}	
 			end
 		else
-			puts "x"*100
 			respond_to do |format|
 				format.js
 			end
@@ -24,8 +23,6 @@ class BugsController < ApplicationController
 		@project = Project.find(params[:project_id])
 		bug = @project.bugs.find(params[:bug_id])
 		authorize bug
-		puts current_user.name
-		puts 'x'*1000
 		bug.update_attribute(:assignment, current_user.name)
 		if bug.bug_type == 'bug'
 			bug.update_attribute(:bug_status, 'started')

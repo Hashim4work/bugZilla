@@ -1,3 +1,23 @@
 // Place all the styles related to the projects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #dddddd;
+}
+
+td, th {
+  
+  text-align: left;
+  padding: 10px;
+  padding-left: 4px !important;
+  margin: 2px;
+  //padding-left: 5px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}

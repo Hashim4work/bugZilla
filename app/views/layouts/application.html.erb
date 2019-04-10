@@ -9,41 +9,49 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.css">
+    <link rel="icon" href="http://example.com/favicon.png">
+    <link rel="shortcut icon" href="http://sstatic.net/stackoverflow/img/favicon.ico">
   </head>
 
   <body>
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav" style="display: inline-block;">
-            <p class="navbar-text pull-right">
-
-              <% if user_signed_in? %>
-                <li><%= link_to "Home", projects_path  %></li>
-                <li><%= link_to  "" + current_user.name , edit_user_registration_path %></li>
-                <% if current_user.user_type == "manager" %> 
-                  <li><%= link_to "New Project", new_project_path %> </li>
-                <% end %>
-                <li><%= link_to "Account", edit_user_registration_path  %></li>
-                <li><%= link_to "Sign out", destroy_user_session_path, :method  => :delete %> </li>
-              <% else %>
-                <li><%= link_to "Sign in", new_user_session_path  %></li>
-                <li><%= link_to "Sign up", new_user_registration_path %> </li>
-              <% end %>
-            </p>
-          </ul>
+    <header class="navbar navbar-default" role="navigation">
+      <div class="navbar-inner">
+        <div class="container">
+          <div id="logo" class="navbar-brand">
+            <% if user_signed_in? %>
+              <ul><li class="btn btn-secondary"> <%= link_to "BugZilla", projects_path , style: "color:blue;" %></li></ul>
+            <% end %>
+          </div>
+          <nav class="collapse navbar-collapse navbar-ex1-collapse">
+            <% if user_signed_in? -%>
+              <ul class="nav navbar-nav" >
+                <li class="btn btn-secondary"><%= link_to "New Project", new_project_path %></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="btn btn-secondary"><%= link_to "Account", edit_user_registration_path  %></li>
+                <li class="btn btn-secondary"><%= link_to "Sign out", destroy_user_session_path, :method  => :delete %></li>
+              </ul>
+            <% else -%>
+              <ul class="nav navbar-nav pull-right">
+                <li class="btn btn-secondary"><%= link_to "Sign up", new_user_registration_path %></li>
+                <li class="btn btn-secondary"><%= link_to "Sign in", new_user_session_path  %></li>
+              </ul>
+            <% end -%>
+          </nav>
         </div>
       </div>
-    </nav>  
+    </header>
      
-     <div class="container">
-      <% if notice %>
-        <p class="alert alert-success"><%= notice %></p>
+    <div id="main_content" class="container">
+      <% flash.each do |name, msg| %>
+        <%= content_tag(:div, msg, class: "alert alert-info") %>
       <% end %>
-      <% if alert %>
-        <p class="alert alert-danger"><%= alert %></p>
-      <% end %>  
-      <%= yield %>
+
+      <div id="content" class="col-md-12 center-block">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>
+
+
