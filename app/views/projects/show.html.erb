@@ -35,9 +35,9 @@
 	<% else %>
 		<p style="margin-top: 10px;"><strong>No  Bugs available</strong></p>
 	<% end %>
-
-	<%= link_to 'New bug', "javascript:void(0)" , id:"bug-link", class: "btn btn-primary"%>
-
+	<% if current_user.user_type == 'qa'%>
+		<%= link_to 'New bug', "javascript:void(0)" , id:"bug-link", class: "btn btn-primary"%>
+	<% end %>
 	<div id="bugsN-section", style="display: none;">
 		<% if current_user.user_type == 'qa' %>
 			<h2>Add new  bug</h2>
