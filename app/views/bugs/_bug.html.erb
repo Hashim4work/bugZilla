@@ -47,7 +47,7 @@
            	<td>
            		<% if bug.assignment? &&  bug.assignment != "completed" %>
 					<%if current_user.user_type == "developer"  && bug.assignment == current_user.name %>
-						<p><%= link_to 'complete?' ,project_bug_update_complete_path(bug.project.id, bug.id) , id:'u_assigner'  if policy(bug).update_complete?%></p>
+						<p><%= link_to 'complete?' ,project_bug_update_complete_path(bug.project.id, bug.id) ,class: "btn btn-success" , id:'u_assigner'  if policy(bug).update_complete?%></p>
 					<%else %>
 						<p><strong>Assigned-to: </strong><%= bug.assignment %> </p>
 					<%end%>
@@ -55,7 +55,7 @@
 					<p><strong>Assigned-to: </strong> Not Assigned because completed</p>
 				<% else %>
 					<% if current_user.user_type == "developer" %>
-						<p><%= link_to 'Assign?' , project_bug_update_assigner_path(bug.project.id, bug.id) , id:'d_assigner'  %></p>
+						<p><%= link_to 'Assign?' , project_bug_update_assigner_path(bug.project.id, bug.id) ,class: "btn btn-primary" , id:'d_assigner'  %></p>
 					<% else %>
 						<p><strong>Assigned-to: </strong> Not Assigned</p>
 					<% end %>

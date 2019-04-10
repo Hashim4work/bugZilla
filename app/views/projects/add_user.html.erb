@@ -1,12 +1,13 @@
 <h1>All users are</h1>
 
 
-<table>
+<table style="width: 100%; table-layout: fixed; padding-lefts: 15px; margin-top: 10px;">
   <thead>
-    <tr>
+    <tr style="border: 1px solid #dddddd; padding-bottom: 10px !important;">
       <th>Name</th>
       <th>Email</th>
       <th>Role</th>
+      <th>Add/remove</th>
     </tr>
   </thead>
 
@@ -19,9 +20,9 @@
 				<td><%= user.email %></td>
 				<td><%= user.user_type %></td>
 				<% if user == @project.users.find_by(id: user.id) %>
-					<td><%= link_to 'Remove user from project' , {controller: 'projects', action: 'remove_user_from_project', user_id: user.id, project_id: @project.id} if policy(@project).remove_user_from_project? %>
+					<td style="padding: 5px;"><%= link_to 'Remove user from project' , {controller: 'projects', action: 'remove_user_from_project', user_id: user.id, project_id: @project.id}, class: "btn btn-default" if policy(@project).remove_user_from_project? %>
 				<% else %>
-					<td><%= link_to 'Add user to project' , {controller: 'projects', action: 'add_user_to_project', user_id: user.id, project_id: @project.id} if policy(@project).add_user_to_project?%>
+					<td style="padding: 5px;"><%= link_to 'Add user to project' , {controller: 'projects', action: 'add_user_to_project', user_id: user.id, project_id: @project.id}, class: "btn btn-default" if policy(@project).add_user_to_project?%>
 				<%end %>		
 				</tr>
 	    <%end %>
@@ -30,4 +31,4 @@
 </table>
 
 
-<%= link_to 'back' , @project  if policy(@project).show? %>
+<%= link_to 'back' , @project , class: "btn btn-info", style: "margin-top: 5px;"  if policy(@project).show? %>
