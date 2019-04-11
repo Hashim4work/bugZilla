@@ -1,9 +1,7 @@
 <h2>Sign up</h2>
+<div class="form-group col-md-6 col-sm-6" style="border: 1px solid grey; padding: 20px; box-shadow: 10px 10px 5px grey; background-color: #0ff6dd"  >
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-
-<form class="form-group col-md-6 col-sm-6" style="border: 1px solid grey; padding: 20px; box-shadow: 10px 10px 5px grey; background-color: #0ff6dd"  >
-
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true%>
@@ -36,8 +34,8 @@
   <div class="actions">
     <%= f.submit "Sign up", class: "btn btn-success"  %><br><br>
   </div>
-  </form>
-<% end %>
-<%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %>
 
+<% end %>
+</div>
 
