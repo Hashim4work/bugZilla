@@ -1,27 +1,30 @@
-<%= form_with(model: project, local: true) do |form| %>
-  <% if project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+<div class="form-group col-md-6 col-sm-6" style="display: inline-block; margin-top: 20px;  border: 1px solid grey; padding: 20px; box-shadow: 10px 10px 5px grey;">
+  <h1 style="text-align: center; margin: 1px auto;">New Project</h1>
+  <%= form_with(model: project, local: true) do |form| %>
+    <% if project.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
 
-      <ul>
-      <% project.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% project.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :title %>
+      <%= form.text_field :title %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :description %>
+      <%= form.text_area :description %>
+    </div>
+
+    <div >
+      <%= form.submit class: "btn btn-success"%>
     </div>
   <% end %>
-
-  <div class="form-group">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div >
-    <%= form.submit class: "btn btn-success"%>
-  </div>
-<% end %>
+</div>
