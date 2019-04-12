@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
 	has_many :bugs, dependent: :destroy
 	has_many :usersprojects, dependent: :destroy
-	has_many :projects, :through => :usersprojects
+	has_many :projects, through: :usersprojects
 
 
   # Include default devise modules. Others available are:
@@ -20,9 +20,7 @@ class User < ApplicationRecord
 		if self.manager?
 			projects = Project.all
 			projects.each do |project|
-				if project.users.find_by(id: self.id).present?
-					project.destroy
-				end
+				project.destroy if project.users.find_by(id: self.id).present?
 			end
 		end
 	end

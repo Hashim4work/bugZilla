@@ -1,32 +1,23 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
- # before_action :verify_authorized
-  
-  # GET /projects
-  # GET /projects.json
+  before_action :set_project_custom, only: [:add_user_to_project, :remove_user_from_project, :add_user]
+  append_before_action :authorize_resource, except: [:index]
+
   def index
     @projects = Project.all
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
   def show
-    authorize @project
   end
 
-  # GET /projects/new
   def new
     @project = current_user.projects.build
     authorize @project
   end
 
-  # GET /projects/1/edit
   def edit
-    authorize @project
   end
 
-  # POST /projects
-  # POST /projects.json
   def create
     @project = current_user.projects.build(project_params)
     authorize @project
@@ -43,14 +34,12 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /projects/1
-  # PATCH/PUT /projects/1.json
   def update
-    authorize @project
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
+
       else
         format.html { render :edit }
         format.json { render json: @project.errors, status: :unprocessable_entity }
@@ -58,11 +47,9 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
+
   def destroy
     @project.destroy
-    authorize @project
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
@@ -70,46 +57,43 @@ class ProjectsController < ApplicationController
   end
 
   def add_user_to_project
-    @project = Project.find(params[:project_id])
-    authorize @project
     user = User.find(params[:user_id])
-    if user != @project.users.find_by(id: user.id)
-      @project.users << user
-    end
+
+    @project.users << user if user != @project.users.find_by(id: user.id)
 
     render 'add_user'
   end
 
   def remove_user_from_project
-    @project = Project.find(params[:project_id])
-    authorize @project
     user = User.find(params[:user_id])
 
     uproject = @project.users.find_by(id: user.id)
 
     usersproject = Usersproject.find_by(user_id: uproject.id, project_id: @project.id)
-    if usersproject
-      usersproject.destroy 
-    end
+    usersproject.destroy if usersproject
+
     render 'add_user'
   end
-  
+
   def add_user
-    @project = Project.find(params[:project_id])
-    authorize @project
     render 'add_user'
   end
 
+private
 
+  def authorize_resource
+    authorize @project
+  end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.find(params[:id])
-    end
+  def set_project
+    @project = Project.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def project_params
-      params.require(:project).permit(:title, :description , current_user)
-    end
+  def set_project_custom
+    @project = Project.find(params[:project_id])
+  end
+
+  def project_params
+    params.require(:project).permit(:title, :description , current_user)
+  end
 end

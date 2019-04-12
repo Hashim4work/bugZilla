@@ -1,10 +1,6 @@
 class BugPolicy < ApplicationPolicy
 
 
-	def index?
-		user.present?
-	end
-	
 	def new?
 		user.present? && user.qa?
 	end

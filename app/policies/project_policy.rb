@@ -1,6 +1,6 @@
 class ProjectPolicy <	ApplicationPolicy
 
-	
+
 	def new?
 		user.present? && user.manager?
 	end
@@ -13,16 +13,20 @@ class ProjectPolicy <	ApplicationPolicy
 		true
 	end
 
+	def custom_policy
+		check_user_in_project
+	end
+
 	def edit?
-		user.present? && user.manager? && user == project.users.find_by(id: user.id)
+		check_user_in_project
 	end
 
 	def destroy?
-		user.present? && user.manager? && user == project.users.find_by(id: user.id)
+		check_user_in_project
 	end
 
 	def add_user?
-		user.present? && user.manager? && user == project.users.find_by(id: user.id)
+		check_user_in_project
 	end
 
 	def add_user_to_project?
@@ -38,4 +42,7 @@ private
 		record
 	end
 
+	def check_user_in_project
+		user.present? && user.manager? && user == project.users.find_by(id: user.id)
+	end
 end
