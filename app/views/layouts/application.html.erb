@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.css">
     <link rel="icon" href="http://example.com/favicon.png">
     <link rel="shortcut icon" href="http://sstatic.net/stackoverflow/img/favicon.ico">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   </head>
 
   <body>
@@ -25,7 +26,7 @@
           <nav class="collapse navbar-collapse navbar-ex1-collapse">
             <% if user_signed_in? -%>
               <ul class="nav navbar-nav" >
-                <li class="btn btn-secondary"><%= link_to "New Project", new_project_path %></li>
+                <li class="btn btn-secondary"><%= link_to "New Project", new_project_path if policy(Project).new? %></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li class="btn btn-secondary"><%= link_to "Account", edit_user_registration_path  %></li>
